@@ -1,0 +1,57 @@
+package com.rumoku.util
+
+class PrimeNumber(primeCollectTo: Int) {
+
+  var timeSpend = 0L
+  var primesArray = List(2, 3, 5, 7)
+
+  def getPrimeFactors(x: Long) = {
+    var xx = x
+    primesArray.foreach(s => while (xx % s == 0) {
+      println(s)
+      xx = xx / s
+    })
+    xx
+  }
+
+  def isPrime(x: Int) = {
+    var res = true
+    val startTime = System.currentTimeMillis()
+    primesArray.takeWhile(e => res).foreach(s => if (x % s == 0) res = false)
+    // above code is two time faster then below one
+    def isPrimeImpl = {
+      for (s <- primesArray)
+        if (x % s == 0)
+          false
+      true
+    }
+    // res = isPrimeImpl
+    timeSpend = timeSpend + (System.currentTimeMillis() - startTime)
+    res
+  }
+
+  def collectPrimes(x: Int): Unit = {
+    isPrime(x) match {
+      case true => primesArray = primesArray ::: List(x)
+      case false => primesArray
+    }
+    if (x < primeCollectTo) collectPrimes(x + 1)
+    else return
+  }
+
+  def reshetoEratosphena(max: Int): List[Int] = {
+    def getPrimes(l: List[Int]): List[Int] = l match {
+      case Nil => List()
+      case h::t => h :: getPrimes(t.filter(k => k % h != 0))
+    }
+
+    var tmp = List[Int]()
+    (2 to max).toStream.foreach(s => tmp = tmp ::: List(s))
+    getPrimes(tmp)
+
+
+
+  }
+
+
+}
