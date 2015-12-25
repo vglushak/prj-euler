@@ -10,7 +10,7 @@ object PathFinder {
   def setup {
     var matrix: List[Array[Int]] = Nil
     for (line <- Source.fromFile(OUTPUT_DIR + "pathfinder.txt").getLines) {
-      val list = line.split(" ").map[Int](x => x.trim.toInt)
+      val list = line.split(" ").map(x => x.trim.toInt)
       matrix = matrix ::: List(list)
     }
     matrix.foreach(x => println(x.toString))

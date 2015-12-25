@@ -24,7 +24,7 @@ object ConsecutiveProduct {
 
 
   def main(args: Array[String]) {
-    println(consProd(l.toList.map[Int](x => x.toInt - 48)))
+    println(consProd(l.toList.map(x => x.toInt - 48)))
   }
 
 }
